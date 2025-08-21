@@ -983,5 +983,5 @@ return (
     </div>
   </div>
 );
-
+};
 export default MoleculeStudio;
