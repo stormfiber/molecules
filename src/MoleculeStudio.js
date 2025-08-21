@@ -8,8 +8,9 @@ const MoleculeStudio = () => {
   const [error, setError] = useState('');
   const [autoRotate, setAutoRotate] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
-  const [viewMode, setViewMode] = useState('ball-stick'); // ball-stick, space-fill, wireframe
+  const [viewMode, setViewMode] = useState('ball-stick');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const mountRef = useRef(null);
@@ -614,336 +615,373 @@ const MoleculeStudio = () => {
     }
   }, [viewMode]);
 
-  return (
-    <div className="w-full h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col overflow-hidden">
-      {/* Header */}
-      <div className="bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo and Title */}
-            <div className="flex items-center space-x-4">
-              <div className="text-3xl">⚛️</div>
-              <div>
-                <h1 className="text-xl font-semibold text-gray-900">Molecule Studio</h1>
-                <p className="text-xs text-gray-500 hidden sm:block">Interactive 3D Molecular Viewer</p>
-              </div>
-            </div>
+ useEffect(() => {
+  const handleResize = () => {
+    const mobile = window.innerWidth < 1024;
+    setIsMobile(mobile);
+    if (!mobile) {
+      setIsMenuOpen(false);
+    }
+  };
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-6">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search molecules..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-64 px-4 py-2 pl-10 bg-gray-50 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <div className="absolute left-3 top-2.5 text-gray-400">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </div>
-              </div>
-              
-              {moleculeData && (
-                <>
-                  <button
-                    onClick={() => setShowInfo(!showInfo)}
-                    className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
-                  >
-                    Info
-                  </button>
-                  <button
-                    onClick={() => setAutoRotate(!autoRotate)}
-                    className={`px-3 py-2 text-sm font-medium transition-colors ${
-                      autoRotate ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
-                    }`}
-                  >
-                    Auto Rotate
-                  </button>
-                </>
-              )}
-            </div>
+  handleResize();
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                      d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
-              </svg>
-            </button>
+return (
+  <div className="w-full h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col overflow-hidden">
+    {/* Header */}
+    <div className="bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo and Title */}
+          <div className="flex items-center space-x-4">
+            <div className="text-3xl">⚛️</div>
+            <div>
+              <h1 className="text-xl font-semibold text-gray-900">Molecule Studio</h1>
+              <p className="text-xs text-gray-500 hidden sm:block">Interactive 3D Molecular Viewer</p>
+            </div>
           </div>
-        </div>
-      </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-gray-200 shadow-lg">
-          <div className="px-4 py-4 space-y-4">
-            <input
-              type="text"
-              placeholder="Search molecules..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-6">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search molecules..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-64 px-4 py-2 pl-10 bg-gray-50 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+              <div className="absolute left-3 top-2.5 text-gray-400">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+            </div>
+            
             {moleculeData && (
-              <div className="flex space-x-4">
+              <>
                 <button
                   onClick={() => setShowInfo(!showInfo)}
-                  className="flex-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 bg-gray-50 rounded-lg transition-colors"
+                  className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
                 >
                   Info
                 </button>
                 <button
                   onClick={() => setAutoRotate(!autoRotate)}
-                  className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                    autoRotate ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 bg-gray-50'
+                  className={`px-3 py-2 text-sm font-medium transition-colors ${
+                    autoRotate ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
                   }`}
                 >
                   Auto Rotate
                 </button>
-              </div>
+              </>
             )}
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                    d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+            </svg>
+          </button>
         </div>
+      </div>
+    </div>
+
+    {/* Mobile Menu */}
+    {isMenuOpen && (
+      <div className="lg:hidden bg-white border-b border-gray-200 shadow-lg">
+        <div className="px-4 py-4 space-y-4">
+          <input
+            type="text"
+            placeholder="Search molecules..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          {moleculeData && (
+            <div className="flex space-x-4">
+              <button
+                onClick={() => {
+                  setShowInfo(!showInfo);
+                  setIsMenuOpen(false);
+                }}
+                className="flex-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 bg-gray-50 rounded-lg transition-colors"
+              >
+                Info
+              </button>
+              <button
+                onClick={() => {
+                  setAutoRotate(!autoRotate);
+                  setIsMenuOpen(false);
+                }}
+                className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  autoRotate ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 bg-gray-50'
+                }`}
+              >
+                Auto Rotate
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+
+    {/* Main Content */}
+    <div className="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
+      {/* Mobile Overlay */}
+      {isMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-10 lg:hidden"
+          onClick={() => setIsMenuOpen(false)}
+        />
       )}
-
-      {/* Main Content */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* Sidebar */}
-        <div className="w-full lg:w-80 bg-white border-r border-gray-200 overflow-y-auto">
-          <div className="p-4">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Molecule Library</h2>
-            
-            {/* View Mode Selector */}
-            {moleculeData && (
-              <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-                <label className="block text-sm font-medium text-gray-700 mb-2">View Mode</label>
-                <div className="grid grid-cols-3 gap-2">
-                  {[
-                    { key: 'ball-stick', label: 'Ball & Stick' },
-                    { key: 'space-fill', label: 'Space Fill' },
-                    { key: 'wireframe', label: 'Wireframe' }
-                  ].map((mode) => (
-                    <button
-                      key={mode.key}
-                      onClick={() => handleViewModeChange(mode.key)}
-                      className={`px-3 py-2 text-xs font-medium rounded-md transition-colors ${
-                        viewMode === mode.key
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-white text-gray-700 hover:bg-gray-100'
-                      }`}
-                    >
-                      {mode.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Molecule List */}
-            <div className="space-y-2">
-              {filteredMolecules.length === 0 ? (
-                <div className="text-center py-8 text-gray-500">
-                  <div className="text-4xl mb-2">🔍</div>
-                  <p>No molecules found</p>
-                </div>
-              ) : (
-                filteredMolecules.map(([key, molecule]) => (
+      
+      {/* Sidebar */}
+      <div className={`${
+        isMenuOpen ? 'block' : 'hidden lg:block'
+      } w-full lg:w-80 bg-white border-r border-gray-200 overflow-y-auto lg:relative absolute lg:z-auto z-20 h-full lg:h-auto max-w-sm lg:max-w-none`}>
+        <div className="p-4">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Molecule Library</h2>
+          
+          {/* View Mode Selector */}
+          {moleculeData && (
+            <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+              <label className="block text-sm font-medium text-gray-700 mb-2">View Mode</label>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { key: 'ball-stick', label: 'Ball & Stick' },
+                  { key: 'space-fill', label: 'Space Fill' },
+                  { key: 'wireframe', label: 'Wireframe' }
+                ].map((mode) => (
                   <button
-                    key={key}
-                    onClick={() => handleMoleculeSelect(key)}
-                    className={`w-full text-left p-4 rounded-lg border transition-all duration-200 ${
-                      selectedMolecule === key
-                        ? 'border-blue-500 bg-blue-50 shadow-md'
-                        : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                    key={mode.key}
+                    onClick={() => handleViewModeChange(mode.key)}
+                    className={`px-3 py-2 text-xs font-medium rounded-md transition-colors ${
+                      viewMode === mode.key
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-white text-gray-700 hover:bg-gray-100'
                     }`}
                   >
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="font-medium text-gray-900">{molecule.name}</h3>
-                        <p className="text-sm text-gray-500 mt-1">{molecule.formula}</p>
-                        <p className="text-xs text-gray-400 mt-2 line-clamp-2">{molecule.description}</p>
-                      </div>
-                      {selectedMolecule === key && (
-                        <div className="text-blue-500">
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                      )}
-                    </div>
+                    {mode.label}
                   </button>
-                ))
-              )}
-            </div>
-          </div>
-        </div>
-        
-        {/* 3D Viewer */}
-        <div className="flex-1 relative bg-gradient-to-br from-gray-50 to-slate-100">
-          <div ref={mountRef} className="w-full h-full" />
-          
-          {/* Loading State */}
-          {loading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm">
-              <div className="text-center">
-                <div className="animate-spin text-5xl mb-4">⚛️</div>
-                <p className="text-lg font-medium text-gray-700">Loading molecule...</p>
-              </div>
-            </div>
-          )}
-          
-          {/* Error State */}
-          {error && (
-            <div className="absolute top-4 left-4 right-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
-              {error}
-            </div>
-          )}
-          
-          {/* Empty State */}
-          {!moleculeData && !loading && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center max-w-md mx-auto px-4">
-                <div className="text-6xl mb-6">⚛️</div>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Welcome to Molecule Studio</h2>
-                <p className="text-gray-600 mb-6">
-                  Explore the fascinating world of molecular structures in interactive 3D. 
-                  Select a molecule from the library to begin your journey.
-                </p>
-                <div className="grid grid-cols-2 gap-4 text-sm text-gray-500">
-                  <div className="flex items-center space-x-2">
-                    <span>🖱️</span>
-                    <span>Drag to rotate</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span>🔍</span>
-                    <span>Scroll to zoom</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span>📱</span>
-                    <span>Touch support</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span>🎨</span>
-                    <span>Multiple view modes</span>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           )}
 
-          {/* Controls */}
-          {moleculeData && (
-            <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md rounded-lg p-4 shadow-lg">
-              <div className="text-sm text-gray-600 space-y-1">
+          {/* Molecule List */}
+          <div className="space-y-2">
+            {filteredMolecules.length === 0 ? (
+              <div className="text-center py-8 text-gray-500">
+                <div className="text-4xl mb-2">🔍</div>
+                <p>No molecules found</p>
+              </div>
+            ) : (
+              filteredMolecules.map(([key, molecule]) => (
+                <button
+                  key={key}
+                  onClick={() => {
+                    handleMoleculeSelect(key);
+                    // Close mobile menu when molecule is selected
+                    if (isMobile) {
+                      setIsMenuOpen(false);
+                    }
+                  }}
+                  className={`w-full text-left p-3 sm:p-4 rounded-lg border transition-all duration-200 ${
+                    selectedMolecule === key
+                      ? 'border-blue-500 bg-blue-50 shadow-md'
+                      : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                  }`}
+                >
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="font-medium text-gray-900 text-sm sm:text-base">{molecule.name}</h3>
+                      <p className="text-xs sm:text-sm text-gray-500 mt-1">{molecule.formula}</p>
+                      <p className="text-xs text-gray-400 mt-2 line-clamp-2 hidden sm:block">{molecule.description}</p>
+                    </div>
+                    {selectedMolecule === key && (
+                      <div className="text-blue-500 ml-2">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                </button>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+      
+      {/* 3D Viewer */}
+      <div className="flex-1 relative bg-gradient-to-br from-gray-50 to-slate-100">
+        <div ref={mountRef} className="w-full h-full" />
+        
+        {/* Loading State */}
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm">
+            <div className="text-center">
+              <div className="animate-spin text-5xl mb-4">⚛️</div>
+              <p className="text-lg font-medium text-gray-700">Loading molecule...</p>
+            </div>
+          </div>
+        )}
+        
+        {/* Error State */}
+        {error && (
+          <div className="absolute top-4 left-4 right-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+            {error}
+          </div>
+        )}
+        
+        {/* Empty State */}
+        {!moleculeData && !loading && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center max-w-md mx-auto px-4">
+              <div className="text-6xl mb-6">⚛️</div>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Welcome to Molecule Studio</h2>
+              <p className="text-gray-600 mb-6">
+                Explore the fascinating world of molecular structures in interactive 3D. 
+                Select a molecule from the library to begin your journey.
+              </p>
+              <div className="grid grid-cols-2 gap-4 text-sm text-gray-500">
                 <div className="flex items-center space-x-2">
-                  <span className="text-base">🖱️</span>
+                  <span>🖱️</span>
                   <span>Drag to rotate</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span className="text-base">🔍</span>
+                  <span>🔍</span>
                   <span>Scroll to zoom</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span className="text-base">📱</span>
-                  <span>Touch gestures supported</span>
+                  <span>📱</span>
+                  <span>Touch support</span>
                 </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Info Panel */}
-        {showInfo && moleculeData && (
-          <div className="w-80 bg-white border-l border-gray-200 overflow-y-auto">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900">Molecule Info</h2>
-                <button
-                  onClick={() => setShowInfo(false)}
-                  className="p-1 rounded-full hover:bg-gray-100 transition-colors"
-                >
-                  <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900">{moleculeData.name}</h3>
-                  <p className="text-lg text-blue-600 font-mono">{moleculeData.formula}</p>
-                </div>
-
-                <div>
-                  <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-2">Description</h4>
-                  <p className="text-gray-600 text-sm leading-relaxed">{moleculeData.description}</p>
-                </div>
-
-                <div className="grid grid-cols-1 gap-4">
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <h4 className="text-sm font-semibold text-gray-700 mb-2">Properties</h4>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Molar Mass:</span>
-                        <span className="font-medium">{moleculeData.molarMass}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Boiling Point:</span>
-                        <span className="font-medium">{moleculeData.boilingPoint}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Melting Point:</span>
-                        <span className="font-medium">{moleculeData.meltingPoint}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <h4 className="text-sm font-semibold text-gray-700 mb-2">Structure</h4>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Atoms:</span>
-                        <span className="font-medium">{moleculeData.atoms.length}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Bonds:</span>
-                        <span className="font-medium">{moleculeData.bonds.length}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <h4 className="text-sm font-semibold text-gray-700 mb-3">Elements</h4>
-                    <div className="space-y-2">
-                      {Object.entries(moleculeData.elements).map(([symbol, element]) => (
-                        <div key={symbol} className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <div 
-                              className="w-4 h-4 rounded-full border border-gray-300"
-                              style={{ backgroundColor: element.color }}
-                            ></div>
-                            <span className="text-sm font-medium">{element.name}</span>
-                          </div>
-                          <span className="text-xs text-gray-500 font-mono">{symbol}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                <div className="flex items-center space-x-2">
+                  <span>🎨</span>
+                  <span>Multiple view modes</span>
                 </div>
               </div>
             </div>
           </div>
         )}
+
+        {/* Controls */}
+        {moleculeData && (
+          <div className="absolute bottom-4 left-4 right-4 sm:right-auto bg-white/90 backdrop-blur-md rounded-lg p-3 sm:p-4 shadow-lg">
+            <div className="text-xs sm:text-sm text-gray-600 space-y-1">
+              <div className="flex items-center space-x-2">
+                <span className="text-base">🖱️</span>
+                <span>Drag to rotate</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-base">🔍</span>
+                <span>Scroll to zoom</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-base">📱</span>
+                <span>Touch gestures supported</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* Info Panel */}
+      {showInfo && moleculeData && (
+        <div className={`${
+          isMobile ? 'fixed inset-0 z-30 bg-white' : 'w-80 bg-white border-l border-gray-200'
+        } overflow-y-auto`}>
+          <div className="p-4 sm:p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Molecule Info</h2>
+              <button
+                onClick={() => setShowInfo(false)}
+                className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+              >
+                <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{moleculeData.name}</h3>
+                <p className="text-base sm:text-lg text-blue-600 font-mono">{moleculeData.formula}</p>
+              </div>
+
+              <div>
+                <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-2">Description</h4>
+                <p className="text-gray-600 text-sm leading-relaxed">{moleculeData.description}</p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4">
+                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                  <h4 className="text-sm font-semibold text-gray-700 mb-2">Properties</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Molar Mass:</span>
+                      <span className="font-medium">{moleculeData.molarMass}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Boiling Point:</span>
+                      <span className="font-medium">{moleculeData.boilingPoint}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Melting Point:</span>
+                      <span className="font-medium">{moleculeData.meltingPoint}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                  <h4 className="text-sm font-semibold text-gray-700 mb-2">Structure</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Atoms:</span>
+                      <span className="font-medium">{moleculeData.atoms.length}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Bonds:</span>
+                      <span className="font-medium">{moleculeData.bonds.length}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                  <h4 className="text-sm font-semibold text-gray-700 mb-3">Elements</h4>
+                  <div className="space-y-2">
+                    {Object.entries(moleculeData.elements).map(([symbol, element]) => (
+                      <div key={symbol} className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div 
+                            className="w-4 h-4 rounded-full border border-gray-300"
+                            style={{ backgroundColor: element.color }}
+                          ></div>
+                          <span className="text-sm font-medium">{element.name}</span>
+                        </div>
+                        <span className="text-xs text-gray-500 font-mono">{symbol}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-  );
-};
+  </div>
+);
 
 export default MoleculeStudio;
