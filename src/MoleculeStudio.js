@@ -20,17 +20,14 @@ const MoleculeStudio = () => {
   const controlsRef = useRef({ mouseDown: false, mouseX: 0, mouseY: 0 });
 
   // Comprehensive molecule database
-  const molecules = {
+        const molecules = {
     water: {
-      name: "Water",
-      formula: "H₂O",
-      description: "Essential for life, water is a polar molecule with unique properties.",
-      molarMass: "18.02 g/mol",
-      boilingPoint: "100°C",
-      meltingPoint: "0°C",
+      name: "Water", formula: "H₂O", category: "Simple",
+      description: "Essential for life, water is a polar molecule with unique hydrogen bonding properties.",
+      properties: { molarMass: "18.02 g/mol", boiling: "100°C", melting: "0°C" },
       elements: {
-        H: { radius: 0.3, color: "#FFFFFF", name: "Hydrogen" },
-        O: { radius: 0.6, color: "#FF0D0D", name: "Oxygen" }
+        H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" },
+        O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
       },
       atoms: [
         { id: "O-1", element: "O", position: [0.0, 0.0, 0.0] },
@@ -43,22 +40,19 @@ const MoleculeStudio = () => {
       ]
     },
     methane: {
-      name: "Methane",
-      formula: "CH₄",
-      description: "The simplest hydrocarbon and main component of natural gas.",
-      molarMass: "16.04 g/mol",
-      boilingPoint: "-162°C",
-      meltingPoint: "-182°C",
+      name: "Methane", formula: "CH₄", category: "Hydrocarbon",
+      description: "The simplest hydrocarbon and main component of natural gas with tetrahedral geometry.",
+      properties: { molarMass: "16.04 g/mol", boiling: "-162°C", melting: "-182°C" },
       elements: {
-        C: { radius: 0.7, color: "#909090", name: "Carbon" },
-        H: { radius: 0.3, color: "#FFFFFF", name: "Hydrogen" }
+        C: { radius: 0.70, color: "#909090", name: "Carbon" },
+        H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" }
       },
       atoms: [
         { id: "C-1", element: "C", position: [0.0, 0.0, 0.0] },
-        { id: "H-1", element: "H", position: [1.09, 0.0, 0.0] },
-        { id: "H-2", element: "H", position: [-0.36, 1.03, 0.0] },
-        { id: "H-3", element: "H", position: [-0.36, -0.52, 0.89] },
-        { id: "H-4", element: "H", position: [-0.36, -0.52, -0.89] }
+        { id: "H-1", element: "H", position: [1.089, 0.0, 0.0] },
+        { id: "H-2", element: "H", position: [-0.363, 1.027, 0.0] },
+        { id: "H-3", element: "H", position: [-0.363, -0.514, 0.889] },
+        { id: "H-4", element: "H", position: [-0.363, -0.514, -0.889] }
       ],
       bonds: [
         { atom1: "C-1", atom2: "H-1", type: "single" },
@@ -68,21 +62,18 @@ const MoleculeStudio = () => {
       ]
     },
     ammonia: {
-      name: "Ammonia",
-      formula: "NH₃",
-      description: "A compound essential for fertilizer production and biological processes.",
-      molarMass: "17.03 g/mol",
-      boilingPoint: "-33°C",
-      meltingPoint: "-78°C",
+      name: "Ammonia", formula: "NH₃", category: "Simple",
+      description: "A pyramidal molecule essential for fertilizer production with a lone pair on nitrogen.",
+      properties: { molarMass: "17.03 g/mol", boiling: "-33°C", melting: "-78°C" },
       elements: {
         N: { radius: 0.65, color: "#3050F8", name: "Nitrogen" },
-        H: { radius: 0.3, color: "#FFFFFF", name: "Hydrogen" }
+        H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" }
       },
       atoms: [
         { id: "N-1", element: "N", position: [0.0, 0.0, 0.0] },
-        { id: "H-1", element: "H", position: [0.0, 1.01, 0.0] },
-        { id: "H-2", element: "H", position: [0.87, -0.51, 0.0] },
-        { id: "H-3", element: "H", position: [-0.87, -0.51, 0.0] }
+        { id: "H-1", element: "H", position: [0.0, 1.012, 0.0] },
+        { id: "H-2", element: "H", position: [0.876, -0.506, 0.0] },
+        { id: "H-3", element: "H", position: [-0.876, -0.506, 0.0] }
       ],
       bonds: [
         { atom1: "N-1", atom2: "H-1", type: "single" },
@@ -90,21 +81,18 @@ const MoleculeStudio = () => {
         { atom1: "N-1", atom2: "H-3", type: "single" }
       ]
     },
-    "carbon-dioxide": {
-      name: "Carbon Dioxide",
-      formula: "CO₂",
-      description: "A linear molecule important in photosynthesis and climate change.",
-      molarMass: "44.01 g/mol",
-      boilingPoint: "-78°C (sublimes)",
-      meltingPoint: "-78°C",
+    co2: {
+      name: "Carbon Dioxide", formula: "CO₂", category: "Simple",
+      description: "A linear molecule crucial for photosynthesis and climate science with double bonds.",
+      properties: { molarMass: "44.01 g/mol", boiling: "-78°C", melting: "-78°C" },
       elements: {
-        C: { radius: 0.7, color: "#909090", name: "Carbon" },
-        O: { radius: 0.6, color: "#FF0D0D", name: "Oxygen" }
+        C: { radius: 0.70, color: "#909090", name: "Carbon" },
+        O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
       },
       atoms: [
         { id: "C-1", element: "C", position: [0.0, 0.0, 0.0] },
-        { id: "O-1", element: "O", position: [1.16, 0.0, 0.0] },
-        { id: "O-2", element: "O", position: [-1.16, 0.0, 0.0] }
+        { id: "O-1", element: "O", position: [1.162, 0.0, 0.0] },
+        { id: "O-2", element: "O", position: [-1.162, 0.0, 0.0] }
       ],
       bonds: [
         { atom1: "C-1", atom2: "O-1", type: "double" },
@@ -112,23 +100,20 @@ const MoleculeStudio = () => {
       ]
     },
     ethylene: {
-      name: "Ethylene",
-      formula: "C₂H₄",
-      description: "An important industrial chemical and plant hormone.",
-      molarMass: "28.05 g/mol",
-      boilingPoint: "-104°C",
-      meltingPoint: "-169°C",
+      name: "Ethylene", formula: "C₂H₄", category: "Hydrocarbon",
+      description: "The simplest alkene with a C=C double bond, important in industry and plant biology.",
+      properties: { molarMass: "28.05 g/mol", boiling: "-104°C", melting: "-169°C" },
       elements: {
-        C: { radius: 0.7, color: "#909090", name: "Carbon" },
-        H: { radius: 0.3, color: "#FFFFFF", name: "Hydrogen" }
+        C: { radius: 0.70, color: "#909090", name: "Carbon" },
+        H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" }
       },
       atoms: [
-        { id: "C-1", element: "C", position: [0.67, 0.0, 0.0] },
-        { id: "C-2", element: "C", position: [-0.67, 0.0, 0.0] },
-        { id: "H-1", element: "H", position: [1.23, 0.92, 0.0] },
-        { id: "H-2", element: "H", position: [1.23, -0.92, 0.0] },
-        { id: "H-3", element: "H", position: [-1.23, 0.92, 0.0] },
-        { id: "H-4", element: "H", position: [-1.23, -0.92, 0.0] }
+        { id: "C-1", element: "C", position: [0.667, 0.0, 0.0] },
+        { id: "C-2", element: "C", position: [-0.667, 0.0, 0.0] },
+        { id: "H-1", element: "H", position: [1.234, 0.924, 0.0] },
+        { id: "H-2", element: "H", position: [1.234, -0.924, 0.0] },
+        { id: "H-3", element: "H", position: [-1.234, 0.924, 0.0] },
+        { id: "H-4", element: "H", position: [-1.234, -0.924, 0.0] }
       ],
       bonds: [
         { atom1: "C-1", atom2: "C-2", type: "double" },
@@ -138,64 +123,27 @@ const MoleculeStudio = () => {
         { atom1: "C-2", atom2: "H-4", type: "single" }
       ]
     },
-    ethanol: {
-      name: "Ethanol",
-      formula: "C₂H₆O",
-      description: "Commonly known as alcohol, used in beverages and as fuel.",
-      molarMass: "46.07 g/mol",
-      boilingPoint: "78°C",
-      meltingPoint: "-114°C",
-      elements: {
-        C: { radius: 0.7, color: "#909090", name: "Carbon" },
-        H: { radius: 0.3, color: "#FFFFFF", name: "Hydrogen" },
-        O: { radius: 0.6, color: "#FF0D0D", name: "Oxygen" }
-      },
-      atoms: [
-        { id: "C-1", element: "C", position: [-1.31, -0.35, 0.0] },
-        { id: "C-2", element: "C", position: [0.18, 0.0, 0.0] },
-        { id: "O-1", element: "O", position: [1.31, -0.78, 0.0] },
-        { id: "H-1", element: "H", position: [-1.31, -1.44, 0.0] },
-        { id: "H-2", element: "H", position: [-1.85, 0.09, 0.89] },
-        { id: "H-3", element: "H", position: [-1.85, 0.09, -0.89] },
-        { id: "H-4", element: "H", position: [0.18, 1.09, 0.0] },
-        { id: "H-5", element: "H", position: [0.72, -0.44, 0.89] },
-        { id: "H-6", element: "H", position: [2.16, -0.48, 0.0] }
-      ],
-      bonds: [
-        { atom1: "C-1", atom2: "C-2", type: "single" },
-        { atom1: "C-2", atom2: "O-1", type: "single" },
-        { atom1: "C-1", atom2: "H-1", type: "single" },
-        { atom1: "C-1", atom2: "H-2", type: "single" },
-        { atom1: "C-1", atom2: "H-3", type: "single" },
-        { atom1: "C-2", atom2: "H-4", type: "single" },
-        { atom1: "C-2", atom2: "H-5", type: "single" },
-        { atom1: "O-1", atom2: "H-6", type: "single" }
-      ]
-    },
     benzene: {
-      name: "Benzene",
-      formula: "C₆H₆",
-      description: "An aromatic hydrocarbon with a distinctive ring structure.",
-      molarMass: "78.11 g/mol",
-      boilingPoint: "80°C",
-      meltingPoint: "5°C",
+      name: "Benzene", formula: "C₆H₆", category: "Aromatic",
+      description: "The archetypal aromatic compound with delocalized π electrons in a hexagonal ring.",
+      properties: { molarMass: "78.11 g/mol", boiling: "80°C", melting: "5°C" },
       elements: {
-        C: { radius: 0.7, color: "#909090", name: "Carbon" },
-        H: { radius: 0.3, color: "#FFFFFF", name: "Hydrogen" }
+        C: { radius: 0.70, color: "#909090", name: "Carbon" },
+        H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" }
       },
       atoms: [
-        { id: "C-1", element: "C", position: [1.21, 0.70, 0.0] },
-        { id: "C-2", element: "C", position: [1.21, -0.70, 0.0] },
-        { id: "C-3", element: "C", position: [0.0, -1.40, 0.0] },
-        { id: "C-4", element: "C", position: [-1.21, -0.70, 0.0] },
-        { id: "C-5", element: "C", position: [-1.21, 0.70, 0.0] },
-        { id: "C-6", element: "C", position: [0.0, 1.40, 0.0] },
-        { id: "H-1", element: "H", position: [2.15, 1.24, 0.0] },
-        { id: "H-2", element: "H", position: [2.15, -1.24, 0.0] },
-        { id: "H-3", element: "H", position: [0.0, -2.48, 0.0] },
-        { id: "H-4", element: "H", position: [-2.15, -1.24, 0.0] },
-        { id: "H-5", element: "H", position: [-2.15, 1.24, 0.0] },
-        { id: "H-6", element: "H", position: [0.0, 2.48, 0.0] }
+        { id: "C-1", element: "C", position: [1.207, 0.696, 0.0] },
+        { id: "C-2", element: "C", position: [1.207, -0.696, 0.0] },
+        { id: "C-3", element: "C", position: [0.0, -1.392, 0.0] },
+        { id: "C-4", element: "C", position: [-1.207, -0.696, 0.0] },
+        { id: "C-5", element: "C", position: [-1.207, 0.696, 0.0] },
+        { id: "C-6", element: "C", position: [0.0, 1.392, 0.0] },
+        { id: "H-1", element: "H", position: [2.146, 1.238, 0.0] },
+        { id: "H-2", element: "H", position: [2.146, -1.238, 0.0] },
+        { id: "H-3", element: "H", position: [0.0, -2.476, 0.0] },
+        { id: "H-4", element: "H", position: [-2.146, -1.238, 0.0] },
+        { id: "H-5", element: "H", position: [-2.146, 1.238, 0.0] },
+        { id: "H-6", element: "H", position: [0.0, 2.476, 0.0] }
       ],
       bonds: [
         { atom1: "C-1", atom2: "C-2", type: "single" },
@@ -212,61 +160,95 @@ const MoleculeStudio = () => {
         { atom1: "C-6", atom2: "H-6", type: "single" }
       ]
     },
-    glucose: {
-      name: "Glucose",
-      formula: "C₆H₁₂O₆",
-      description: "A simple sugar that is an important energy source in living organisms.",
-      molarMass: "180.16 g/mol",
-      boilingPoint: "146°C (decomposes)",
-      meltingPoint: "146°C",
-      elements: {
-        C: { radius: 0.7, color: "#909090", name: "Carbon" },
-        H: { radius: 0.3, color: "#FFFFFF", name: "Hydrogen" },
-        O: { radius: 0.6, color: "#FF0D0D", name: "Oxygen" }
-      },
-      atoms: [
-        { id: "C-1", element: "C", position: [1.2, 0.7, 0.0] },
-        { id: "C-2", element: "C", position: [0.0, 1.4, 0.0] },
-        { id: "C-3", element: "C", position: [-1.2, 0.7, 0.0] },
-        { id: "C-4", element: "C", position: [-1.2, -0.7, 0.0] },
-        { id: "C-5", element: "C", position: [0.0, -1.4, 0.0] },
-        { id: "C-6", element: "C", position: [1.2, -0.7, 0.0] },
-        { id: "O-1", element: "O", position: [2.4, 1.4, 0.0] },
-        { id: "O-2", element: "O", position: [0.0, 2.8, 0.0] },
-        { id: "O-3", element: "O", position: [-2.4, 1.4, 0.0] },
-        { id: "O-4", element: "O", position: [-2.4, -1.4, 0.0] },
-        { id: "O-5", element: "O", position: [0.0, -2.8, 0.0] },
-        { id: "O-6", element: "O", position: [2.4, -1.4, 0.0] },
-        { id: "H-1", element: "H", position: [3.2, 1.0, 0.0] },
-        { id: "H-2", element: "H", position: [0.8, 3.2, 0.0] },
-        { id: "H-3", element: "H", position: [-3.2, 1.0, 0.0] },
-        { id: "H-4", element: "H", position: [-3.2, -1.0, 0.0] },
-        { id: "H-5", element: "H", position: [-0.8, -3.2, 0.0] },
-        { id: "H-6", element: "H", position: [3.2, -1.0, 0.0] }
-      ],
-      bonds: [
-        { atom1: "C-1", atom2: "C-2", type: "single" },
-        { atom1: "C-2", atom2: "C-3", type: "single" },
-        { atom1: "C-3", atom2: "C-4", type: "single" },
-        { atom1: "C-4", atom2: "C-5", type: "single" },
-        { atom1: "C-5", atom2: "C-6", type: "single" },
-        { atom1: "C-6", atom2: "C-1", type: "single" },
-        { atom1: "C-1", atom2: "O-1", type: "single" },
-        { atom1: "C-2", atom2: "O-2", type: "single" },
-        { atom1: "C-3", atom2: "O-3", type: "single" },
-        { atom1: "C-4", atom2: "O-4", type: "single" },
-        { atom1: "C-5", atom2: "O-5", type: "single" },
-        { atom1: "C-6", atom2: "O-6", type: "single" },
-        { atom1: "O-1", atom2: "H-1", type: "single" },
-        { atom1: "O-2", atom2: "H-2", type: "single" },
-        { atom1: "O-3", atom2: "H-3", type: "single" },
-        { atom1: "O-4", atom2: "H-4", type: "single" },
-        { atom1: "O-5", atom2: "H-5", type: "single" },
-        { atom1: "O-6", atom2: "H-6", type: "single" }
-      ]
-    }
+  ethanol: {
+    name: "Ethanol", formula: "C₂H₆O", category: "Alcohol",
+    description: "A common alcohol used in beverages and as a solvent, featuring a hydroxyl group.",
+    properties: { molarMass: "46.08 g/mol", boiling: "78°C", melting: "-114°C" },
+    elements: {
+      C: { radius: 0.70, color: "#909090", name: "Carbon" },
+      H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" },
+      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
+    },
+    atoms: [
+      { id: "C-1", element: "C", position: [0.0, 0.0, 0.0] },
+      { id: "C-2", element: "C", position: [1.54, 0.0, 0.0] },
+      { id: "O-1", element: "O", position: [2.08, 1.21, 0.0] },
+      { id: "H-1", element: "H", position: [-0.54, 0.90, 0.0] },
+      { id: "H-2", element: "H", position: [-0.54, -0.90, 0.0] },
+      { id: "H-3", element: "H", position: [1.54, -0.90, 0.0] },
+      { id: "H-4", element: "H", position: [1.54, 0.90, 0.0] },
+      { id: "H-5", element: "H", position: [2.63, 1.21, 0.90] }
+    ],
+    bonds: [
+      { atom1: "C-1", atom2: "C-2", type: "single" },
+      { atom1: "C-2", atom2: "O-1", type: "single" },
+      { atom1: "C-1", atom2: "H-1", type: "single" },
+      { atom1: "C-1", atom2: "H-2", type: "single" },
+      { atom1: "C-2", atom2: "H-3", type: "single" },
+      { atom1: "C-2", atom2: "H-4", type: "single" },
+      { atom1: "O-1", atom2: "H-5", type: "single" }
+    ]
+  },
+  hydrogenPeroxide: {
+    name: "Hydrogen Peroxide", formula: "H₂O₂", category: "Peroxide",
+    description: "A reactive oxygen compound often used as a disinfectant, with a bent molecular geometry.",
+    properties: { molarMass: "34.01 g/mol", boiling: "150.2°C", melting: "-0.43°C" },
+    elements: {
+      H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" },
+      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
+    },
+    atoms: [
+      { id: "O-1", element: "O", position: [0.0, 0.0, 0.0] },
+      { id: "O-2", element: "O", position: [1.47, 0.0, 0.0] },
+      { id: "H-1", element: "H", position: [-0.48, 0.92, 0.0] },
+      { id: "H-2", element: "H", position: [1.95, 0.92, 0.0] }
+    ],
+    bonds: [
+      { atom1: "O-1", atom2: "O-2", type: "single" },
+      { atom1: "O-1", atom2: "H-1", type: "single" },
+      { atom1: "O-2", atom2: "H-2", type: "single" }
+    ]
+  },
+  formaldehyde: {
+    name: "Formaldehyde", formula: "CH₂O", category: "Aldehyde",
+    description: "A simple aldehyde with a planar structure, commonly used as a preservative.",
+    properties: { molarMass: "30.03 g/mol", boiling: "-19°C", melting: "-80°C" },
+    elements: {
+      C: { radius: 0.70, color: "#909090", name: "Carbon" },
+      H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" },
+      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
+    },
+    atoms: [
+      { id: "C-1", element: "C", position: [0.0, 0.0, 0.0] },
+      { id: "O-1", element: "O", position: [1.21, 0.0, 0.0] },
+      { id: "H-1", element: "H", position: [-0.54, 0.90, 0.0] },
+      { id: "H-2", element: "H", position: [-0.54, -0.90, 0.0] }
+    ],
+    bonds: [
+      { atom1: "C-1", atom2: "O-1", type: "double" },
+      { atom1: "C-1", atom2: "H-1", type: "single" },
+      { atom1: "C-1", atom2: "H-2", type: "single" }
+    ]
+  },
+  nitricOxide: {
+    name: "Nitric Oxide", formula: "NO", category: "Simple",
+    description: "A diatomic molecule with an odd electron, acts as a signaling molecule in biology.",
+    properties: { molarMass: "30.01 g/mol", boiling: "-152°C", melting: "-163°C" },
+    elements: {
+      N: { radius: 0.65, color: "#3050F8", name: "Nitrogen" },
+      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
+    },
+    atoms: [
+      { id: "N-1", element: "N", position: [0.0, 0.0, 0.0] },
+      { id: "O-1", element: "O", position: [1.15, 0.0, 0.0] }
+    ],
+    bonds: [
+      { atom1: "N-1", atom2: "O-1", type: "double" }
+    ]
+  }
   };
 
+  
   const filteredMolecules = Object.entries(molecules).filter(([key, mol]) =>
     mol.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     mol.formula.toLowerCase().includes(searchTerm.toLowerCase()) ||
