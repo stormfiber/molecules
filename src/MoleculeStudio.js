@@ -164,11 +164,7 @@ const MoleculeStudio = () => {
     name: "Ethanol", formula: "C₂H₆O", category: "Alcohol",
     description: "A common alcohol used in beverages and as a solvent, featuring a hydroxyl group.",
     properties: { molarMass: "46.08 g/mol", boiling: "78°C", melting: "-114°C" },
-    elements: {
-      C: { radius: 0.70, color: "#909090", name: "Carbon" },
-      H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" },
-      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
-    },
+    elements: { C: { radius: 0.70, color: "#909090", name: "Carbon" }, H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" }, O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" } },
     atoms: [
       { id: "C-1", element: "C", position: [0.0, 0.0, 0.0] },
       { id: "C-2", element: "C", position: [1.54, 0.0, 0.0] },
@@ -193,10 +189,7 @@ const MoleculeStudio = () => {
     name: "Hydrogen Peroxide", formula: "H₂O₂", category: "Peroxide",
     description: "A reactive oxygen compound often used as a disinfectant, with a bent molecular geometry.",
     properties: { molarMass: "34.01 g/mol", boiling: "150.2°C", melting: "-0.43°C" },
-    elements: {
-      H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" },
-      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
-    },
+    elements: { H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" }, O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" } },
     atoms: [
       { id: "O-1", element: "O", position: [0.0, 0.0, 0.0] },
       { id: "O-2", element: "O", position: [1.47, 0.0, 0.0] },
@@ -213,11 +206,7 @@ const MoleculeStudio = () => {
     name: "Formaldehyde", formula: "CH₂O", category: "Aldehyde",
     description: "A simple aldehyde with a planar structure, commonly used as a preservative.",
     properties: { molarMass: "30.03 g/mol", boiling: "-19°C", melting: "-80°C" },
-    elements: {
-      C: { radius: 0.70, color: "#909090", name: "Carbon" },
-      H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" },
-      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
-    },
+    elements: { C: { radius: 0.70, color: "#909090", name: "Carbon" }, H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" }, O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" } },
     atoms: [
       { id: "C-1", element: "C", position: [0.0, 0.0, 0.0] },
       { id: "O-1", element: "O", position: [1.21, 0.0, 0.0] },
@@ -234,10 +223,7 @@ const MoleculeStudio = () => {
     name: "Nitric Oxide", formula: "NO", category: "Simple",
     description: "A diatomic molecule with an odd electron, acts as a signaling molecule in biology.",
     properties: { molarMass: "30.01 g/mol", boiling: "-152°C", melting: "-163°C" },
-    elements: {
-      N: { radius: 0.65, color: "#3050F8", name: "Nitrogen" },
-      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
-    },
+    elements: { N: { radius: 0.65, color: "#3050F8", name: "Nitrogen" }, O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" } },
     atoms: [
       { id: "N-1", element: "N", position: [0.0, 0.0, 0.0] },
       { id: "O-1", element: "O", position: [1.15, 0.0, 0.0] }
@@ -245,9 +231,233 @@ const MoleculeStudio = () => {
     bonds: [
       { atom1: "N-1", atom2: "O-1", type: "double" }
     ]
+  },
+  acetone: {
+    name: "Acetone", formula: "C₃H₆O", category: "Ketone",
+    description: "A volatile ketone commonly used as a solvent in laboratories and industry.",
+    properties: { molarMass: "58.08 g/mol", boiling: "56°C", melting: "-95°C" },
+    elements: { C: { radius: 0.70, color: "#909090", name: "Carbon" }, H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" }, O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" } },
+    atoms: [
+      { id: "C-1", element: "C", position: [0.0, 0.0, 0.0] },
+      { id: "C-2", element: "C", position: [1.52, 0.0, 0.0] },
+      { id: "C-3", element: "C", position: [3.04, 0.0, 0.0] },
+      { id: "O-1", element: "O", position: [3.56, 1.20, 0.0] },
+      { id: "H-1", element: "H", position: [-0.54, 0.90, 0.0] },
+      { id: "H-2", element: "H", position: [-0.54, -0.90, 0.0] },
+      { id: "H-3", element: "H", position: [1.52, -0.90, 0.0] },
+      { id: "H-4", element: "H", position: [1.52, 0.90, 0.0] },
+      { id: "H-5", element: "H", position: [3.04, -0.90, 0.0] },
+      { id: "H-6", element: "H", position: [3.04, 0.90, 0.0] }
+    ],
+    bonds: [
+      { atom1: "C-1", atom2: "C-2", type: "single" },
+      { atom1: "C-2", atom2: "C-3", type: "single" },
+      { atom1: "C-3", atom2: "O-1", type: "double" },
+      { atom1: "C-1", atom2: "H-1", type: "single" },
+      { atom1: "C-1", atom2: "H-2", type: "single" },
+      { atom1: "C-2", atom2: "H-3", type: "single" },
+      { atom1: "C-2", atom2: "H-4", type: "single" },
+      { atom1: "C-3", atom2: "H-5", type: "single" },
+      { atom1: "C-3", atom2: "H-6", type: "single" }
+    ]
+  },
+  hydrogenCyanide: {
+    name: "Hydrogen Cyanide", formula: "HCN", category: "Simple",
+    description: "A linear molecule with a triple bond between carbon and nitrogen, highly toxic.",
+    properties: { molarMass: "27.03 g/mol", boiling: "25.6°C", melting: "-13.4°C" },
+    elements: {
+      H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" },
+      C: { radius: 0.70, color: "#909090", name: "Carbon" },
+      N: { radius: 0.65, color: "#3050F8", name: "Nitrogen" }
+    },
+    atoms: [
+      { id: "H-1", element: "H", position: [-1.1, 0.0, 0.0] },
+      { id: "C-1", element: "C", position: [0.0, 0.0, 0.0] },
+      { id: "N-1", element: "N", position: [1.16, 0.0, 0.0] }
+    ],
+    bonds: [
+      { atom1: "H-1", atom2: "C-1", type: "single" },
+      { atom1: "C-1", atom2: "N-1", type: "triple" }
+    ]
+  },
+  sulfurDioxide: {
+    name: "Sulfur Dioxide", formula: "SO₂", category: "Simple",
+    description: "A bent molecule with double bonds to oxygen, important in atmospheric chemistry.",
+    properties: { molarMass: "64.07 g/mol", boiling: "-10°C", melting: "-72°C" },
+    elements: {
+      S: { radius: 1.04, color: "#FFFF30", name: "Sulfur" },
+      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
+    },
+    atoms: [
+      { id: "S-1", element: "S", position: [0.0, 0.0, 0.0] },
+      { id: "O-1", element: "O", position: [1.43, 0.0, 0.0] },
+      { id: "O-2", element: "O", position: [-1.43, 0.0, 0.0] }
+    ],
+    bonds: [
+      { atom1: "S-1", atom2: "O-1", type: "double" },
+      { atom1: "S-1", atom2: "O-2", type: "double" }
+    ]
+  },
+  hydrogenChloride: {
+    name: "Hydrogen Chloride", formula: "HCl", category: "Simple",
+    description: "A diatomic molecule, a strong acid when dissolved in water.",
+    properties: { molarMass: "36.46 g/mol", boiling: "-85°C", melting: "-114°C" },
+    elements: {
+      H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" },
+      Cl: { radius: 1.02, color: "#1FF01F", name: "Chlorine" }
+    },
+    atoms: [
+      { id: "H-1", element: "H", position: [0.0, 0.0, 0.0] },
+      { id: "Cl-1", element: "Cl", position: [1.27, 0.0, 0.0] }
+    ],
+    bonds: [
+      { atom1: "H-1", atom2: "Cl-1", type: "single" }
+    ]
+  },
+  nitricAcid: {
+    name: "Nitric Acid", formula: "HNO₃", category: "Acid",
+    description: "A strong acid with a planar nitrate group, used in fertilizers and explosives.",
+    properties: { molarMass: "63.01 g/mol", boiling: "83°C", melting: "-42°C" },
+    elements: {
+      H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" },
+      N: { radius: 0.65, color: "#3050F8", name: "Nitrogen" },
+      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
+    },
+    atoms: [
+      { id: "H-1", element: "H", position: [-0.96, 0.0, 0.0] },
+      { id: "N-1", element: "N", position: [0.0, 0.0, 0.0] },
+      { id: "O-1", element: "O", position: [1.23, 0.0, 0.0] },
+      { id: "O-2", element: "O", position: [0.0, 1.15, 0.0] },
+      { id: "O-3", element: "O", position: [0.0, -1.15, 0.0] }
+    ],
+    bonds: [
+      { atom1: "H-1", atom2: "O-1", type: "single" },
+      { atom1: "O-1", atom2: "N-1", type: "single" },
+      { atom1: "N-1", atom2: "O-2", type: "double" },
+      { atom1: "N-1", atom2: "O-3", type: "double" }
+    ]
+  },
+  formicAcid: {
+    name: "Formic Acid", formula: "HCOOH", category: "Acid",
+    description: "Simplest carboxylic acid with a planar structure, pungent smell.",
+    properties: { molarMass: "46.03 g/mol", boiling: "100.8°C", melting: "8.4°C" },
+    elements: {
+      H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" },
+      C: { radius: 0.70, color: "#909090", name: "Carbon" },
+      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
+    },
+    atoms: [
+      { id: "H-1", element: "H", position: [-1.0, 0.0, 0.0] },
+      { id: "C-1", element: "C", position: [0.0, 0.0, 0.0] },
+      { id: "O-1", element: "O", position: [1.2, 0.0, 0.0] },
+      { id: "O-2", element: "O", position: [0.0, 1.2, 0.0] },
+      { id: "H-2", element: "H", position: [0.0, 1.9, 0.0] }
+    ],
+    bonds: [
+      { atom1: "H-1", atom2: "C-1", type: "single" },
+      { atom1: "C-1", atom2: "O-1", type: "double" },
+      { atom1: "C-1", atom2: "O-2", type: "single" },
+      { atom1: "O-2", atom2: "H-2", type: "single" }
+    ]
+  },
+  hydrogenPeroxide: {
+    name: "Hydrogen Peroxide", formula: "H₂O₂", category: "Simple",
+    description: "A reactive oxygen species used as a disinfectant and bleaching agent.",
+    properties: { molarMass: "34.01 g/mol", boiling: "150.2°C", melting: "-0.43°C" },
+    elements: {
+      H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" },
+      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
+    },
+    atoms: [
+      { id: "O-1", element: "O", position: [0, 0, 0] },
+      { id: "O-2", element: "O", position: [1.45, 0, 0] },
+      { id: "H-1", element: "H", position: [-0.58, 0.78, 0] },
+      { id: "H-2", element: "H", position: [2.03, 0.78, 0] }
+    ],
+    bonds: [
+      { atom1: "O-1", atom2: "O-2", type: "single" },
+      { atom1: "O-1", atom2: "H-1", type: "single" },
+      { atom1: "O-2", atom2: "H-2", type: "single" }
+    ]
+  },
+  carbonMonoxide: {
+    name: "Carbon Monoxide", formula: "CO", category: "Simple",
+    description: "A linear molecule with a triple bond; toxic gas produced by incomplete combustion.",
+    properties: { molarMass: "28.01 g/mol", boiling: "-191.5°C", melting: "-205°C" },
+    elements: {
+      C: { radius: 0.70, color: "#909090", name: "Carbon" },
+      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
+    },
+    atoms: [
+      { id: "C-1", element: "C", position: [0, 0, 0] },
+      { id: "O-1", element: "O", position: [1.13, 0, 0] }
+    ],
+    bonds: [
+      { atom1: "C-1", atom2: "O-1", type: "triple" }
+    ]
+  },
+  sulfurHexafluoride: {
+    name: "Sulfur Hexafluoride", formula: "SF₆", category: "Inorganic",
+    description: "A highly inert octahedral molecule used as an electrical insulator.",
+    properties: { molarMass: "146.06 g/mol", boiling: "-64°C", melting: "-50°C" },
+    elements: {
+      S: { radius: 1.04, color: "#FFFF30", name: "Sulfur" },
+      F: { radius: 0.57, color: "#00FF00", name: "Fluorine" }
+    },
+    atoms: [
+      { id: "S-1", element: "S", position: [0, 0, 0] },
+      { id: "F-1", element: "F", position: [1.56, 0, 0] },
+      { id: "F-2", element: "F", position: [-1.56, 0, 0] },
+      { id: "F-3", element: "F", position: [0, 1.56, 0] },
+      { id: "F-4", element: "F", position: [0, -1.56, 0] },
+      { id: "F-5", element: "F", position: [0, 0, 1.56] },
+      { id: "F-6", element: "F", position: [0, 0, -1.56] }
+    ],
+    bonds: [
+      { atom1: "S-1", atom2: "F-1", type: "single" },
+      { atom1: "S-1", atom2: "F-2", type: "single" },
+      { atom1: "S-1", atom2: "F-3", type: "single" },
+      { atom1: "S-1", atom2: "F-4", type: "single" },
+      { atom1: "S-1", atom2: "F-5", type: "single" },
+      { atom1: "S-1", atom2: "F-6", type: "single" }
+    ]
+  },
+  nitricOxide: {
+    name: "Nitric Oxide", formula: "NO", category: "Simple",
+    description: "A diatomic radical molecule with one unpaired electron; important in signaling.",
+    properties: { molarMass: "30.01 g/mol", boiling: "-152°C", melting: "-163°C" },
+    elements: {
+      N: { radius: 0.65, color: "#3050F8", name: "Nitrogen" },
+      O: { radius: 0.66, color: "#FF0D0D", name: "Oxygen" }
+    },
+    atoms: [
+      { id: "N-1", element: "N", position: [0, 0, 0] },
+      { id: "O-1", element: "O", position: [1.15, 0, 0] }
+    ],
+    bonds: [
+      { atom1: "N-1", atom2: "O-1", type: "double" }
+    ]
+  },
+  hydrogenSulfide: {
+    name: "Hydrogen Sulfide", formula: "H₂S", category: "Simple",
+    description: "A bent molecule with a foul odor, toxic at high concentrations.",
+    properties: { molarMass: "34.08 g/mol", boiling: "-60°C", melting: "-85°C" },
+    elements: {
+      H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" },
+      S: { radius: 1.04, color: "#FFFF30", name: "Sulfur" }
+    },
+    atoms: [
+      { id: "S-1", element: "S", position: [0, 0, 0] },
+      { id: "H-1", element: "H", position: [0.96, 0.78, 0] },
+      { id: "H-2", element: "H", position: [-0.96, 0.78, 0] }
+    ],
+    bonds: [
+      { atom1: "S-1", atom2: "H-1", type: "single" },
+      { atom1: "S-1", atom2: "H-2", type: "single" }
+    ]
   }
-  };
-
+};
+                                            
   
   const filteredMolecules = Object.entries(molecules).filter(([key, mol]) =>
     mol.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
