@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/molecules/static/css/main.86f8a690.css",
+    "main.js": "/molecules/static/js/main.f8d217d3.js",
+    "index.html": "/molecules/index.html",
+    "main.86f8a690.css.map": "/molecules/static/css/main.86f8a690.css.map",
+    "main.f8d217d3.js.map": "/molecules/static/js/main.f8d217d3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.86f8a690.css",
+    "static/js/main.f8d217d3.js"
+  ]
+}
