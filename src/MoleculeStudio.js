@@ -455,6 +455,44 @@ const MoleculeStudio = () => {
       { atom1: "S-1", atom2: "H-1", type: "single" },
       { atom1: "S-1", atom2: "H-2", type: "single" }
     ]
+  },
+  phosphine: {
+    name: "Phosphine", formula: "PH₃", category: "Simple",
+    description: "A pyramidal molecule with phosphorus at the center and a lone pair; used in chemical synthesis.",
+    properties: { molarMass: "33.99 g/mol", boiling: "-87.7°C", melting: "-133.8°C" },
+    elements: {
+      P: { radius: 1.07, color: "#FF8000", name: "Phosphorus" },
+      H: { radius: 0.31, color: "#FFFFFF", name: "Hydrogen" }
+    },
+    atoms: [
+      { id: "P-1", element: "P", position: [0, 0, 0] },
+      { id: "H-1", element: "H", position: [0.58, 0.78, 0] },
+      { id: "H-2", element: "H", position: [-0.58, 0.78, 0] },
+      { id: "H-3", element: "H", position: [0, -0.78, 0] }
+    ],
+    bonds: [
+      { atom1: "P-1", atom2: "H-1", type: "single" },
+      { atom1: "P-1", atom2: "H-2", type: "single" },
+      { atom1: "P-1", atom2: "H-3", type: "single" }
+    ]
+  },
+  carbonDisulfide: {
+    name: "Carbon Disulfide", formula: "CS₂", category: "Simple",
+    description: "A linear molecule with double bonds between carbon and sulfur; volatile solvent.",
+    properties: { molarMass: "76.14 g/mol", boiling: "46.3°C", melting: "-111.6°C" },
+    elements: {
+      C: { radius: 0.70, color: "#909090", name: "Carbon" },
+      S: { radius: 1.04, color: "#FFFF30", name: "Sulfur" }
+    },
+    atoms: [
+      { id: "C-1", element: "C", position: [0, 0, 0] },
+      { id: "S-1", element: "S", position: [1.56, 0, 0] },
+      { id: "S-2", element: "S", position: [-1.56, 0, 0] }
+    ],
+    bonds: [
+      { atom1: "C-1", atom2: "S-1", type: "double" },
+      { atom1: "C-1", atom2: "S-2", type: "double" }
+    ]
   }
 };
                                             
